@@ -1,0 +1,5 @@
+# Project exclude paths
+/common/target/
+/RemoteEJB/target/
+/lab3backJaxRS/target/
+.idea
