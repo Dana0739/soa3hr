@@ -36,12 +36,30 @@ public class HrServer {
     public Response hrHire(@PathParam("person-id") long personId, @PathParam("org-id") long orgId,
                            @PathParam("position") String position, @PathParam("status") String status,
                            @PathParam("start-date") String date) throws NamingException {
-        return Response.status(lookupHrStatelessBean().callXmlHrHireWorkerDTO(personId, orgId, position, status, date)).build();
+        String response = lookupHrStatelessBean().callXmlHrHireWorkerDTO(personId, orgId, position, status, date);
+        return Response.status(Integer.parseInt(response.substring(0, 3))).entity(response).build();
     }
 
     @POST
     @Path("/fire/{id}")
-    public Response hrHire(@PathParam("id") long id) throws NamingException {
-        return Response.status(lookupHrStatelessBean().callXmlHrHireWorkerDTO(id)).build();
+    public Response hrFire(@PathParam("id") long id) throws NamingException {
+        String response = lookupHrStatelessBean().callXmlHrFireWorkerDTO(id);
+        return Response.status(Integer.parseInt(response.substring(0, 3))).entity(response).build();
+    }
+
+    @GET
+    @Path("/hire/{person-id}/{org-id}/{position}/{status}/{start-date}")
+    public Response hrHireTEST(@PathParam("person-id") long personId, @PathParam("org-id") long orgId,
+                           @PathParam("position") String position, @PathParam("status") String status,
+                           @PathParam("start-date") String date) throws NamingException {
+        String response = lookupHrStatelessBean().callXmlHrHireWorkerDTO(personId, orgId, position, status, date);
+        return Response.status(Integer.parseInt(response.substring(0, 3))).entity(response).build();
+    }
+
+    @GET
+    @Path("/fire/{id}")
+    public Response hrFireTEST(@PathParam("id") long id) throws NamingException {
+        String response = lookupHrStatelessBean().callXmlHrFireWorkerDTO(id);
+        return Response.status(Integer.parseInt(response.substring(0, 3))).entity(response).build();
     }
 }

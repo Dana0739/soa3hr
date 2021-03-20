@@ -4,9 +4,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@XmlRootElement(name="HRHireFireWorkerDTO")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class HRHireFireWorkerDTO {
     @XmlElement
@@ -16,18 +18,31 @@ public class HRHireFireWorkerDTO {
     @XmlElement
     Status status;
     @XmlElement
-    Date startDate;
+    String startDate;
     @XmlElement
-    Date endDate;
+    String endDate;
 
     public HRHireFireWorkerDTO() {
-        this.endDate = new Date();
+        Date ed = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.endDate = dateFormat.format(ed);
     }
 
-    public HRHireFireWorkerDTO(Long orgId, Position position, Status status, Date startDate) {
+    public HRHireFireWorkerDTO(Long orgId, Position position, Status status, String startDate) {
         this.organizationId = orgId;
         this.position = position;
         this.status = status;
         this.startDate = startDate;
+    }
+
+    @Override
+    public String toString() {
+        return "<HRHireFireWorkerDTO>"
+                + "<organizationId>" + ((this.organizationId == null) ? "" : this.organizationId) + "</organizationId>"
+                + "<position>" + ((this.position == null) ? "" : this.position) + "</position>"
+                + "<status>" + ((this.status == null) ? "" : this.status) + "</status>"
+                + "<startDate>" + ((this.startDate == null) ? "" : this.startDate) + "</startDate>"
+                + "<endDate>" + ((this.endDate == null) ? "" : this.endDate) + "</endDate>"
+                + "</HRHireFireWorkerDTO>";
     }
 }
